@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Call | APSLOCK</title>
+    <!-- Google Fonts for Modern Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@700;800;900&family=Great+Vibes&family=Oswald:wght@700&display=swap"
+        rel="stylesheet">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            background-color: #ffffff;
+            color: #0f172a;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Light Header Override */
+        .glass-header.light-mode {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02);
+            color: #0f172a;
+        }
+
+        .logo-text.light-mode {
+            color: #0f172a;
+        }
+
+        .header-btn.light-mode {
+            color: #fff;
+            background: #2563eb;
+            border: none;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Vanta Cloud Hero Section */
+        #vanta-canvas {
+            width: 100vw;
+            height: 60vh;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 1;
+        }
+
+        /* Gradient mask seamlessly blending the cloud canvas entirely down into the clean white booking section */
+        .cloud-fade-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(to bottom, transparent, #ffffff);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .hero-cloud-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            padding-top: 60px;
+        }
+
+        .book-title {
+            font-size: clamp(3rem, 5vw, 4.5rem);
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            margin-bottom: 10px;
+            line-height: 1.1;
+            letter-spacing: -2px;
+            color: #0f172a;
+        }
+
+        .book-subtitle {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: #334155;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Slot Booking Section */
+        .slot-booking-section {
+            width: 100vw;
+            background: #ffffff;
+            position: relative;
+            z-index: 5;
+            padding: 20px 20px 100px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .book-container {
+            width: 100%;
+            max-width: 1000px;
+            background: #f8fafc;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 24px;
+            padding: 60px;
+            box-shadow: 0 20px 80px rgba(0, 0, 0, 0.04);
+            text-align: center;
+        }
+
+        .book-placeholder {
+            width: 100%;
+            height: 500px;
+            border-radius: 16px;
+            background: #ffffff;
+            border: 1px dashed rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #64748b;
+            box-shadow: inset 0 4px 20px rgba(0, 0, 0, 0.02);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bp-icon {
+            margin-bottom: 20px;
+            color: #3b82f6;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header Map (Identical structural grid, tightly centered to viewport securely) -->
+    <header class="glass-header light-mode"
+        style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 100; max-width: 800px; width: 90%;">
+        <a href="index.html" class="logo" style="text-decoration: none;">
+            <img src="apslockblue_nobg.png" alt="APSLOCK Logo" style="height: 32px; width: auto;">
+            <span class="logo-text light-mode">APSLOCK</span>
+        </a>
+        <a href="index.html" class="header-btn light-mode"
+            style="text-decoration: none; display: inline-flex; justify-content: center; align-items: center;">Return
+            Home</a>
+    </header>
+
+    <!-- Interactive Vanta Cloud Hero Engine -->
+    <!-- Scaled heavily pushing clouds downwards maximizing sky clearance geometry natively -->
+    <section id="vanta-canvas" style="height: 90vh;">
+        <!-- All template layout text removed to prepare for dynamic additions later entirely natively -->
+
+        <!-- Natural atmospheric blend masking smoothly down into the layout explicitly tracking constraints -->
+        <div class="cloud-fade-bottom"></div>
+    </section>
+
+    <!-- Slot Booking Interface securely resting on pure white bounding base -->
+    <section class="slot-booking-section" style="min-height: 50vh;">
+        <!-- Clean bounding box awaiting structural injection later -->
+    </section>
+
+    <!-- Native custom trailing physics-based cursor -->
+    <div class="magic-cursor" id="magicCursor">
+        <svg fill="none" viewBox="0 0 24 24" class="mc-svg">
+            <defs>
+                <linearGradient id="cursorGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#2563eb" />
+                    <stop offset="100%" stop-color="#3b82f6" />
+                </linearGradient>
+            </defs>
+            <path
+                d="M4.12 2.37L20.89 11.2C21.78 11.67 21.6 12.98 20.63 13.2L14.48 14.6C14.18 14.67 13.93 14.88 13.82 15.16L11 21.05C10.57 21.95 9.25 21.8 8.94 20.85L3.11 3.8C2.8 2.87 3.75 2.01 4.6 2.37Z"
+                fill="url(#cursorGradient)" stroke="#2563eb" stroke-width="1.5" stroke-linejoin="round" />
+        </svg>
+    </div>
+
+    <!-- Ensure physics loop initializes locally successfully -->
+    <script src="script.js"></script>
+
+    <!-- Vanta.js & Three.js Native Inject Mappings -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.clouds.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            VANTA.CLOUDS({
+                el: "#vanta-canvas",
+                mouseControls: true,
+                touchControls: true,
+                gyroControls: false,
+                minHeight: 200.00,
+                minWidth: 200.00,
+                skyColor: 0x2d9eea // Retaining exact sky tint map requested
+            });
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,2365 @@
+/* Base Reset & Variables */
+:root {
+    --white: #ffffff;
+    --dark-text: #000000;
+    --blue-dark: #1e3a8a;
+    --blue-vivid: #2563eb;
+    --blue-light: #60a5fa;
+    --glass-bg: rgba(255, 255, 255, 0.3);
+    --glass-border: rgba(255, 255, 255, 0.4);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--white);
+    color: var(--dark-text);
+    overflow-x: hidden;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ========================================= */
+/* LAYOUT SECTIONS                           */
+/* ========================================= */
+
+.hero-section-wrapper {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ========================================= */
+/* BACKGROUND GRADIENTS (GRAINY BLUE)        */
+/* ========================================= */
+
+
+
+.top-gradients-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 85vh;
+    /* Reaches down behind the hero but fades out */
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+    /* Soft fade perfectly to white at the bottom */
+    mask-image: linear-gradient(to bottom, black 0%, black 50%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 50%, transparent 100%);
+    background: transparent;
+    /* No dark color, fades purely into var(--white) */
+}
+
+/* Add shiny glass reflection overlay */
+.noise-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Replaced grainy shade with a shiny glass finish */
+    background: linear-gradient(120deg, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0) 70%, rgba(255, 255, 255, 0.4) 100%);
+    mix-blend-mode: screen;
+    /* Boosts the bright shiny highlights dynamically over the colors */
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Gradient Blobs that flow and drop waves */
+.gradient-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.9;
+    animation: flowWave 4s infinite alternate ease-in-out;
+    /* Accelerated native speed securely mapping request */
+}
+
+.blob-1 {
+    top: -150px;
+    left: -10%;
+    width: 70vw;
+    height: 500px;
+    background: #0051ff;
+    /* Deep vibrant blue */
+    animation-delay: 0s;
+}
+
+.blob-2 {
+    top: -200px;
+    left: 20%;
+    width: 60vw;
+    height: 600px;
+    /* Lighter blue */
+    animation-delay: -3s;
+    animation-duration: 7s;
+    /* Offset fluid speed */
+}
+
+.blob-3 {
+    top: -100px;
+    right: -10%;
+    width: 60vw;
+    height: 500px;
+    background: #00e1ff;
+    /* Cyan pop */
+    animation-delay: -5s;
+    opacity: 0.6;
+}
+
+.blob-4 {
+    top: -180px;
+    left: 50%;
+    width: 70vw;
+    height: 550px;
+    background: #2563eb;
+    animation-delay: -2s;
+}
+
+/* Drops waves downwards randomly */
+.blob-5 {
+    top: -50px;
+    left: 35%;
+    width: 40vw;
+    height: 400px;
+    background: #60a5fa;
+    animation: dropWaves 1.5s infinite alternate ease-in-out;
+    /* Increased vertical drop speed heavily */
+}
+
+@keyframes flowWave {
+    0% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+    }
+
+    33% {
+        transform: translate(140px, -80px) scale(1.15) rotate(15deg);
+    }
+
+    66% {
+        transform: translate(-100px, 100px) scale(0.85) rotate(-10deg);
+    }
+
+    100% {
+        transform: translate(80px, -50px) scale(1.1) rotate(8deg);
+    }
+}
+
+@keyframes dropWaves {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(180px) scale(1.2);
+        opacity: 0.4;
+    }
+}
+
+/* ========================================= */
+/* HEADER                                    */
+/* ========================================= */
+
+.glass-header {
+    position: relative;
+    /* Sits above the gradient */
+    z-index: 10;
+    width: 92%;
+    max-width: 1200px;
+    margin-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 24px;
+    border-radius: 9999px;
+
+    /* Whiteish glass that blurs the bright blue behind it */
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05), inset 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #ffffff;
+}
+
+.logo-text {
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    font-size: 1.05rem;
+    text-transform: uppercase;
+}
+
+.header-btn {
+    background: linear-gradient(135deg, #e6f2ff 0%, #4a8df4 25%, #4a8df4 75%, #cae8ff 100%);
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    border: none;
+    padding: 12px 28px;
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    box-shadow: 0 15px 35px -5px rgba(59, 130, 246, 0.5), 0 8px 15px -3px rgba(59, 130, 246, 0.4);
+    transition: all 0.3s ease;
+}
+
+.header-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 25px 45px -5px rgba(59, 130, 246, 0.6), 0 12px 20px -5px rgba(59, 130, 246, 0.4);
+    background: linear-gradient(135deg, #f2f8ff 0%, #3b82f6 25%, #3b82f6 75%, #d8eeff 100%);
+}
+
+/* ========================================= */
+/* HERO CONTENT                              */
+/* ========================================= */
+
+.hero-content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex: 1;
+    padding: 0 20px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.slots-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(248, 250, 252, 0.85);
+    border: 1px solid #e2e8f0;
+    padding: 6px 6px 6px 14px;
+    border-radius: 9999px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+    backdrop-filter: blur(8px);
+}
+
+.blinking-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #10b981;
+    /* Green */
+    border-radius: 50%;
+    position: relative;
+}
+
+.blinking-dot::after {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #10b981;
+    opacity: 0.4;
+    animation: blink 1.5s infinite ease-out;
+}
+
+@keyframes blink {
+    0% {
+        transform: scale(0.5);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(2.5);
+        opacity: 0;
+    }
+}
+
+.arrow-circle {
+    background: #3b82f6;
+    /* Blue Arrow Background */
+    color: white;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.main-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 4.8rem;
+    font-weight: 900;
+    line-height: 1.05;
+    margin-bottom: 28px;
+    letter-spacing: -1.8px;
+    text-transform: uppercase;
+
+    /* Static Gradient for Main Title */
+    background: linear-gradient(to right,
+            #ffffff 0%,
+            #ffffff 25%,
+            #ffffff 50%,
+            #ffffff 75%,
+            #ffffff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    /* Fallback */
+
+    max-width: 1000px;
+    position: relative;
+    /* Soft drop shadow underneath text so the white shine remains legible over the white backdrop */
+    filter: drop-shadow(0px 1px 8px rgba(113, 184, 250, 0.5));
+}
+
+.subtitle {
+    font-size: 1.15rem;
+    font-weight: 700;
+    /* Bold as per image */
+    color: #000000;
+    /* Solid black */
+    margin-bottom: 40px;
+    max-width: 600px;
+    letter-spacing: -0.2px;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+}
+
+.primary-btn {
+    background: linear-gradient(135deg, #e6f2ff 0%, #4a8df4 25%, #4a8df4 75%, #cae8ff 100%);
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    border: none;
+    padding: 16px 36px;
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: 1.05rem;
+    cursor: pointer;
+    box-shadow: 0 18px 40px -5px rgba(59, 130, 246, 0.5), 0 10px 18px -4px rgba(59, 130, 246, 0.4);
+    /* Intensely Lifted */
+    transition: all 0.3s ease;
+}
+
+.primary-btn:hover {
+    transform: translateY(-5px);
+    /* Extra lift on hover */
+    box-shadow: 0 30px 50px -5px rgba(59, 130, 246, 0.6), 0 15px 25px -5px rgba(59, 130, 246, 0.4);
+    background: linear-gradient(135deg, #f2f8ff 0%, #3b82f6 25%, #3b82f6 75%, #d8eeff 100%);
+}
+
+.secondary-btn {
+    background: #3f3f46;
+    /* Very dark grayish black */
+    color: white;
+    border: none;
+    padding: 16px 36px;
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: 1.05rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.secondary-btn:hover {
+    transform: translateY(-2px);
+    background: #27272a;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* ========================================= */
+/* TRUSTED BY / MARQUEE SECTION              */
+/* ========================================= */
+
+.trusted-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Removed padding completely to lock section tightly to the stretch animation below */
+    padding: 60px 0 0px 0;
+    margin-top: 40px;
+    z-index: 10;
+    position: relative;
+    background-color: transparent;
+}
+
+.trusted-text {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #64748b;
+    /* Slate 500 */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+}
+
+.marquee-container {
+    width: 100%;
+    max-width: 1200px;
+    overflow: hidden;
+    /* Fades out on the left and right sides seamlessly */
+    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    display: flex;
+}
+
+.marquee-content {
+    display: flex;
+    gap: 80px;
+    align-items: center;
+    /* Start at -50% to show Set 2, animate to 0% to pull Set 1 across */
+    transform: translateX(-50%);
+    animation: scrollLeftToRight 35s linear infinite;
+    padding-right: 80px;
+    /* Important: equal to gap for seamless loop snapping */
+    min-width: max-content;
+}
+
+@keyframes scrollLeftToRight {
+    0% {
+        transform: translateX(-50%);
+    }
+
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+.marquee-logo {
+    height: 35px;
+    opacity: 0.4;
+    filter: grayscale(100%);
+    transition: opacity 0.3s ease, filter 0.3s ease, transform 0.3s ease;
+    user-select: none;
+    flex-shrink: 0;
+}
+
+.marquee-logo:hover {
+    opacity: 0.8;
+    filter: grayscale(0%);
+    transform: scale(1.05);
+    /* Slight pop on hover */
+}
+
+/* ========================================= */
+/* SCROLL STRETCH REVEAL EFFECT              */
+/* ========================================= */
+
+.scroll-stretch-container {
+    position: relative;
+    width: 100%;
+    /* Container height strictly defines the scroll timeline duration */
+    height: 400px;
+    background-color: transparent;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    /* Softened negative margin to exactly -200px to allow breathing room */
+    margin-top: -200px;
+    z-index: 1;
+}
+
+/* ========================================= */
+/* WHAT WE DO SECTION                        */
+/* ========================================= */
+
+.what-we-do-section {
+    width: 100%;
+    background-color: #050b14;
+    /* Switched to deep pitch navy/black to fuse with the SVG baseline */
+    color: var(--white);
+    /* Slashed padding heavily per user request to aggressively tighten section density */
+    padding: 80px 5% 20px 5%;
+    display: flex;
+    justify-content: center;
+}
+
+.wwd-container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    gap: 80px;
+    /* Aligns both the left text block and right visual block to strictly start at identical top positioning */
+    align-items: flex-start;
+}
+
+.wwd-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.wwd-right {
+    flex: 1;
+    display: flex;
+    /* Stripped align-items: center so it naturally floats flush to the top edge exactly aligned with the left text */
+    justify-content: center;
+}
+
+.wwd-overline {
+    font-size: 1.25rem;
+    /* Increased size significantly */
+    font-weight: 700;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+}
+
+.wwd-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 60px;
+    color: #ffffff;
+}
+
+.wwd-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.wwd-tab {
+    position: relative;
+    padding: 24px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.wwd-tab:first-child {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tab-slide-title {
+    font-size: 1.25rem;
+    /* Shrunk slightly per request */
+    font-weight: 600;
+    color: #64748b;
+    /* Slate 500 when inactive */
+    transition: color 0.3s ease;
+}
+
+.wwd-tab:hover .tab-slide-title {
+    color: #94a3b8;
+}
+
+.tab-content {
+    height: 0;
+    /* Changed from max-height to rigidly freeze layout boundaries */
+    opacity: 0;
+    overflow: hidden;
+    /* Smooth CSS height interpolation */
+    transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, margin-top 0.3s ease;
+}
+
+.tab-headline {
+    font-size: 1rem;
+    /* Decreased size */
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 12px;
+}
+
+.tab-desc {
+    font-size: 0.9rem;
+    /* Decreased size */
+    color: #94a3b8;
+    line-height: 1.6;
+}
+
+/* Active State */
+.wwd-tab.active .tab-slide-title {
+    color: #ffffff;
+}
+
+.wwd-tab.active .tab-content {
+    /* Forcing all tabs to equal absolute physical heights prevents ALL layout jitter/shifting */
+    height: 150px;
+    opacity: 1;
+    margin-top: 20px;
+}
+
+/* Progress-Bar Line Loader */
+.tab-progress {
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: transparent;
+    overflow: hidden;
+}
+
+.tab-progress-fill {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #1e3a8a, #2563eb, #60a5fa);
+    /* Swapped from fiery red to brand deep/vivid blues */
+    border-radius: 4px;
+}
+
+/* When active, trigger the 5s fill animation */
+.wwd-tab.active .tab-progress-fill {
+    animation: fillProgress 5s linear forwards;
+}
+
+@keyframes fillProgress {
+    0% {
+        width: 0%;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+/* Visual Right Column Placeholders */
+.wwd-visual-container {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    position: relative;
+    /* Removed max-width entirely to make the block massively larger */
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    /* Outer frame stays completely rigid and fixed */
+    overflow: hidden;
+}
+
+.wwd-visual-pane {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease;
+    /* Removed transform scaling completely. Contents stay fundamentally flat and still */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wwd-visual-pane.active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 2;
+}
+
+.visual-placeholder {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.placeholder-glow {
+    position: absolute;
+    width: 60%;
+    height: 60%;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.2;
+}
+
+.placeholder-1 .placeholder-glow {
+    background: #10b981;
+}
+
+/* Emerald green matching reference */
+.placeholder-2 .placeholder-glow {
+    background: #3b82f6;
+}
+
+/* Blue */
+.placeholder-3 .placeholder-glow {
+    background: #8b5cf6;
+}
+
+/* Purple */
+
+.placeholder-card-content {
+    width: 65%;
+    height: 45%;
+    background: rgba(10, 15, 25, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    z-index: 2;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 900px) {
+    .wwd-container {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .wwd-visual-container {
+        aspect-ratio: 16 / 9;
+    }
+}
+
+/* ========================================= */
+/* BOTTOM SCROLL TRANSITION ARCH             */
+/* ========================================= */
+
+.bottom-stretch-container {
+    position: relative;
+    width: 100%;
+    /* Tightened the physical depth curve block down to 120px to further kill dead space */
+    height: 120px;
+    background-color: var(--white);
+    /* White base to immediately bleed into the next section natively */
+    overflow: visible;
+    /* To allow path bounding safely */
+    margin-bottom: -1px;
+}
+
+/* ========================================= */
+/* WHY CHOOSE US SECTION                     */
+/* ========================================= */
+
+.choose-us-section {
+    width: 100%;
+    background-color: var(--white);
+    /* Pristine white background matching the reference */
+    padding: 60px 5% 120px 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+}
+
+.choose-us-header {
+    text-align: center;
+    max-width: 700px;
+    margin-bottom: 80px;
+}
+
+.choose-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: #0f172a;
+    /* Slate 900 for maximal contrast over white */
+    margin-bottom: 20px;
+}
+
+.choose-subtitle {
+    font-size: 1.1rem;
+    color: #64748b;
+    /* Slate 500 */
+    line-height: 1.6;
+}
+
+.choose-us-grid {
+    width: 100%;
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.choose-card {
+    position: relative;
+    background-color: var(--white);
+    border-radius: 20px;
+    padding: 40px;
+    overflow: hidden;
+    /* Explicit mapped angle casts 10px deep bottom-right mimicking spatial lift */
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    /* Transition translation dynamically per user request to explicitly hover lift */
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease;
+    border: 1px solid rgba(0, 0, 0, 0.02);
+}
+
+.choose-card:hover {
+    /* Lifting visually by translating physically Upwards over the Y axis */
+    transform: translateY(-12px);
+    box-shadow: 25px 25px 15px rgba(0, 0, 0, 0.35);
+    /* Pop the shadow intensity slightly */
+}
+
+.icon-circle {
+    width: 48px;
+    /* Decreased heavily strictly limiting bounding box footprint */
+    height: 48px;
+    border-radius: 50%;
+    /* Migrated to explicitly requested linear gradient payload */
+    background: linear-gradient(90deg, #a4c9ef, #7fc0fd, #1f93ff, #1f93ff, #155ebf);
+    color: #ffffff;
+    /* Requested crisp white icons */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.icon-circle svg {
+    /* Scale the embedded strokes natively for the solid circle context */
+    width: 20px;
+    height: 20px;
+}
+
+.choose-card h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.25rem;
+    /* Dropped natively mimicking 5pt constraint request */
+    font-weight: 800;
+    margin-bottom: 16px;
+    /* High-fidelity CSS gradient text clipping map */
+    background: linear-gradient(90deg, #a4c9ef, #7fc0fd, #1f93ff, #1f93ff, #155ebf);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+.choose-card p {
+    font-size: 0.85rem;
+    /* Explicitly reduced 5 textual points structurally */
+    font-weight: 700;
+    /* Massively increased weight strictly copying reference dense body */
+    color: #0f172a;
+    /* Hardened to deep dark slate/black */
+    line-height: 1.5;
+    position: relative;
+    z-index: 2;
+}
+
+.watermark {
+    position: absolute;
+    top: 30px;
+    /* Elevated to top right sector instead of base */
+    right: 30px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.6rem;
+    /* Reduced directly natively locking scale constraint */
+    font-weight: 800;
+    /* Identical vivid gradient text clipping */
+    background: linear-gradient(90deg, #a4c9ef, #7fc0fd, #1f93ff, #1f93ff, #155ebf);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    opacity: 1;
+    /* Stripped ghosting to pull into foreground fully saturated */
+    z-index: 1;
+    transition: transform 0.4s ease;
+}
+
+/* Subtle micro-animation to pop the massive gradient font slightly on overall card lift */
+.choose-card:hover .watermark {
+    transform: scale(1.05);
+    /* Removed the tilt, strictly scaling purely */
+}
+
+/* Mobile responsive layout overrides */
+@media (max-width: 1000px) {
+    .choose-us-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .choose-us-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ========================================= */
+/* ALTERNATIVE WHY CHOOSE US SECTION         */
+/* ========================================= */
+
+.choose-us-alt-section {
+    position: relative;
+    width: 100%;
+    background-color: var(--white);
+    padding: 100px 0 140px 0;
+    overflow: hidden;
+    /* contain blobs */
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+}
+
+.alt-blobs-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.alt-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.6;
+    /* very blur */
+    left: 0;
+    top: 0;
+}
+
+.alt-blob-1 {
+    width: 700px;
+    height: 700px;
+    background: linear-gradient(135deg, #0284c7, #38bdf8);
+    /* lighter blue */
+}
+
+.alt-blob-2 {
+    width: 450px;
+    height: 450px;
+    background: linear-gradient(135deg, #2563eb, #60a5fa);
+}
+
+.choose-us-alt-header {
+    position: relative;
+    z-index: 1;
+    padding: 0 5%;
+    margin-bottom: 60px;
+    max-width: 1200px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.alt-choose-title {
+    font-size: 5rem;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.alt-title-why {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    color: #93c5fd;
+    text-transform: uppercase;
+}
+
+.alt-title-choose {
+    font-family: 'Great Vibes', cursive;
+    color: #3b82f6;
+    margin: 0 10px;
+    font-size: 6rem;
+    font-weight: 400;
+}
+
+.alt-title-us {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    color: #1d4ed8;
+    text-transform: uppercase;
+}
+
+.alt-choose-subtitle {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1e293b;
+    max-width: 450px;
+    line-height: 1.5;
+}
+
+/* Cards Carousel */
+.alt-marquee-container {
+    position: relative;
+    width: 100vw;
+    max-width: 100%;
+    margin-left: calc(-50vw + 50%);
+    overflow: hidden;
+    padding: 20px 0;
+    z-index: 2;
+}
+
+.alt-marquee-track {
+    display: flex;
+    white-space: nowrap;
+}
+
+.alt-marquee-content {
+    display: flex;
+    gap: 40px;
+    padding-left: 40px;
+    animation: scrollAltCards 40s linear infinite;
+    /* very slow */
+}
+
+@keyframes scrollAltCards {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(calc(-50% - 20px));
+    }
+}
+
+.alt-blur-wall {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 25vw;
+    z-index: 10;
+    pointer-events: none;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.left-wall {
+    left: 0;
+    mask-image: linear-gradient(to right, black 30%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, black 30%, transparent 100%);
+}
+
+.right-wall {
+    right: 0;
+    mask-image: linear-gradient(to left, black 30%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to left, black 30%, transparent 100%);
+}
+
+.alt-card {
+    width: 440px;
+    height: 320px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 1);
+    border-radius: 30px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.04), inset 0 0 20px rgba(255, 255, 255, 0.8);
+    flex-shrink: 0;
+    transition: transform 0.4s ease;
+}
+
+.alt-card:hover {
+    transform: translateY(-8px);
+}
+
+.alt-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 50px;
+}
+
+.alt-card-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #93c5fd, #2563eb);
+    box-shadow: -4px 6px 12px rgba(37, 99, 235, 0.4);
+}
+
+.alt-card-num {
+    font-family: 'Oswald', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    background-image: linear-gradient(to bottom, #93c5fd, #3b82f6);
+    line-height: 1;
+    margin-top: -10px;
+}
+
+.alt-card-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    background: linear-gradient(to bottom right, #93c5fd, #1e3a8a);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: normal;
+}
+
+.alt-card-desc {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #475569;
+    line-height: 1.5;
+    white-space: normal;
+}
+
+/* ========================================= */
+/* OUR WORK TRACK & STICKY SEQUENCE          */
+/* ========================================= */
+
+.our-work-section {
+    position: relative;
+    width: 100%;
+    background-color: var(--white);
+    padding-top: 60px;
+    /* Space explicitly above bg text */
+    /* Removed overflow: hidden because it natively destroys child position: sticky algorithms in CSS! */
+}
+
+/* Background Text Wrapper (Absolute boundary securely mapping for sticky) */
+.our-work-bg-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70%;
+    /* Pulled constraint sharply to make it scroll up physically faster than the cards */
+    pointer-events: none;
+    z-index: 1;
+    /* Pushed safely to the deep background *below* the cards */
+}
+
+/* The giant floating text in the deep background */
+.our-work-bg-text {
+    position: sticky;
+    top: 24vh;
+    /* Brought physically Up natively */
+    width: 100%;
+    text-align: center;
+    font-family: 'Outfit', sans-serif;
+    font-size: 8vw;
+    /* Explicitly scaled down cleanly locally requested */
+    letter-spacing: -2px;
+    font-weight: 900;
+    line-height: 1;
+    white-space: nowrap;
+    margin: 0;
+    /* Blast 100% opacity solid metallic gradient mapping explicitly securely natively */
+    background: linear-gradient(135deg, #a4c9ef 0%, #1f93ff 50%, #155ebf 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    opacity: 1 !important;
+}
+
+/* Master Tall Container dictating rigid track scrolling length */
+.our-work-track {
+    /* Massive vertical space maps staggered sequence strictly across long user physical scroll time */
+    height: 300vh;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+    /* Safely override background overlay layer */
+    padding-top: 50vh;
+    /* Aggressive block delaying appearance preventing top side collisions */
+}
+
+/* Bounding horizontal padding bounds keeping cards off actual page edges safely */
+.work-cards-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+    height: 100%;
+}
+
+/* Individual columns creating native X-Axis visual staging natively out of absolute structures */
+.ow-lane {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 22%;
+    /* Slices master bounds into quarters cleanly */
+    pointer-events: none;
+}
+
+/* Rendered Card bounds overriding tracking wrapper explicitly */
+.ow-card {
+    position: sticky;
+    /* Natively locks to internal lane boundaries once view limits execute */
+    pointer-events: auto;
+    /* Accept click focus back from mapping layer */
+    background: #ffffff;
+    width: 100%;
+    border-radius: 20px;
+    padding: 24px;
+    /* Restored raw structural padding explicitly pushing text back inside boundaries natively */
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+    /* Strict global angle drop shadow sequence maps */
+    display: flex;
+    flex-direction: column;
+    /* Identical hover transitions to preceding section logic explicitly re-applied */
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease;
+}
+
+.ow-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 25px 25px 15px rgba(0, 0, 0, 0.35);
+}
+
+/* ============================================== */
+/* SEQUENCE COORDINATES MAPPING STRICTLY NATIVELY */
+/* Requested Order Target execution: 3 -> 1 -> 4 -> 2 */
+/* ============================================== */
+
+/* Sequence 1: Card 3 (Lane 3) sticks highest on screen physically mapping to exact mockup scatter layout */
+.ow-lane-3 {
+    left: 50%;
+    padding-top: 5vh;
+}
+
+.ow-lane-3 .ow-card {
+    top: 15vh;
+}
+
+/* Sequence 2: Card 1 (Lane 1) follows seamlessly tracking 15vh below layout structure natively */
+.ow-lane-1 {
+    left: 2%;
+    padding-top: 35vh;
+}
+
+.ow-lane-1 .ow-card {
+    top: 30vh;
+}
+
+/* Sequence 3: Card 4 (Lane 4) */
+.ow-lane-4 {
+    left: 74%;
+    padding-top: 65vh;
+}
+
+.ow-lane-4 .ow-card {
+    top: 45vh;
+}
+
+/* Sequence 4 (Last execution boundary block): Card 2 (Lane 2) maps deepest */
+.ow-lane-2 {
+    left: 26%;
+    padding-top: 95vh;
+}
+
+.ow-lane-2 .ow-card {
+    top: 60vh;
+}
+
+
+/* ========================================= */
+/* INTERNAL CARD AESTHETICS (Clone Mockup Identically) */
+/* ========================================= */
+.ow-img-box {
+    margin-top: -14px;
+    margin-left: -14px;
+    margin-right: -14px;
+    width: calc(100% + 28px);
+    /* Extruded box geometrically exactly cutting bezels exclusively for the image boundaries */
+    aspect-ratio: 4 / 3;
+    background: #39b8fa;
+    /* Reconstruct purely explicit generic blue mockup box boundaries */
+    border-radius: 12px;
+    margin-bottom: 30px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+    /* Identical recursive shadow map applied explicitly natively to internals */
+}
+
+.ow-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.5rem;
+    /* Strict density */
+    font-weight: 800;
+    margin-bottom: 12px;
+    padding-left: 8px;
+    /* Pushed specifically inward away from the left boundary natively explicitly requested */
+}
+
+.ow-light {
+    color: #81b1f2;
+}
+
+.ow-heavy {
+    color: #1871df;
+}
+
+.ow-desc {
+    font-size: 0.95rem;
+    font-weight: 800;
+    /* Re-apply explicitly heavy internal weight bounds */
+    color: #0f172a;
+    line-height: 1.4;
+    margin-bottom: 24px;
+    padding-left: 8px;
+    /* Offset safely away from left wall */
+}
+
+.ow-tags {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    padding-left: 8px;
+    /* Offset safely away from left wall */
+}
+
+.ow-tag {
+    background: #f1f5f9;
+    color: #475569;
+    /* Soft muted slate explicit map */
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 50px;
+}
+
+.ow-link {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #334155;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    padding-left: 8px;
+    /* Offset safely away from left wall */
+}
+
+.ow-link:hover {
+    color: #1f93ff;
+}
+
+/* ========================================= */
+/* TESTIMONIALS & INFINITE SCROLL TRACKS     */
+/* ========================================= */
+
+.testimonials-section {
+    padding: 75px 140px 40px;
+    /* Cleanly dialed to exactly 75px spatial separation requested between structural sections natively */
+    background-color: var(--white);
+    display: flex;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Master Grid Layout Splitting 40/60 Layout Natively */
+.testi-container {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 4fr 5fr;
+    gap: 80px;
+    align-items: center;
+}
+
+/* --- Left Column Info Block Constraints --- */
+.testi-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.testi-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #f0f7ff;
+    color: #1f93ff;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    border: 1px solid #dbeafe;
+    width: max-content;
+}
+
+.testi-title {
+    font-size: 3.5rem;
+    /* Remapped down from 4.5rem avoiding linebreaking severe layouts securely */
+    font-weight: 700;
+    line-height: 1.1;
+    color: #050b14;
+    margin-bottom: 24px;
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: -1px;
+}
+
+.testi-heavy {
+    color: #1f93ff;
+}
+
+.testi-subtitle {
+    font-size: 1.15rem;
+    color: #475569;
+    line-height: 1.6;
+    margin-bottom: 50px;
+    max-width: 440px;
+}
+
+.testi-subtitle strong {
+    color: #0f172a;
+    font-weight: 800;
+    /* Bolded requested mapped bounding text natively */
+}
+
+/* --- Score & Trust Badges Logic --- */
+.testi-stats {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.testi-avatars-pool {
+    display: flex;
+}
+
+.t-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    margin-left: -16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    /* Mimic physical depth of array */
+}
+
+.t-avatar:first-child {
+    margin-left: 0;
+}
+
+.testi-score {
+    display: flex;
+    flex-direction: column;
+}
+
+.testi-stars {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 4px;
+}
+
+.testi-stars strong {
+    font-size: 1.1rem;
+    color: #0f172a;
+    margin-right: 6px;
+    font-weight: 800;
+}
+
+.testi-tagline {
+    font-size: 0.85rem;
+    color: #64748b;
+    font-weight: 600;
+}
+
+/* ========================================= */
+/* DUAL HARDWARE ANIMATED MARQUEE ARCHITECTURE */
+/* ========================================= */
+.testi-right {
+    display: flex;
+    gap: 24px;
+    height: 650px;
+    /* Locks bounding physical constraint loop height explicitly */
+    /* Webkit-mask-image renders extremely complex gradient cutting preventing hard edge cuts instantly fading bounds purely! */
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+}
+
+.testi-marquee-col {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    border-radius: 16px;
+}
+
+.testi-track {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* Core Physics Animations Execution Strings! */
+.testi-track-down {
+    animation: marqueeDown 35s linear infinite;
+}
+
+.testi-track-up {
+    animation: marqueeUp 28s linear infinite;
+}
+
+/* Slight staggered timing implicitly prevents mapped mirrored symmetry bounds */
+
+/* "Hold to pause & read" - Pure natively hooked CSS pause states mapped flawlessly */
+.testi-marquee-col:hover .testi-track {
+    animation-play-state: paused;
+}
+
+@keyframes marqueeDown {
+    0% {
+        transform: translateY(-50%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes marqueeUp {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-50%);
+    }
+}
+
+/* --- Internal Singular Review Components Aesthetics Architecture --- */
+.t-card {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 72px 28px;
+    /* Hard deep 45 angle mapping mimicking requested 20px offset blur 10 */
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+}
+
+.t-card-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    margin-bottom: 16px;
+    object-fit: cover;
+}
+
+.t-card h4 {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 4px;
+}
+
+.t-loc {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #94a3b8;
+    margin-bottom: 20px;
+}
+
+.t-card-stars {
+    color: #1f93ff;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.t-card-text {
+    font-size: 0.95rem;
+    color: #334155;
+    line-height: 1.6;
+    font-weight: 500;
+}
+
+
+/* ========================================= */
+/* INTERACTIVE 3D FAQ GRID                   */
+/* ========================================= */
+
+.faq-section {
+    padding: 100px 40px;
+    background-image: radial-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+    background-size: 30px 30px;
+    /* Subtle cursor grid pattern mimicking asset strictly */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.faq-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.faq-title {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 800;
+    font-family: 'Outfit', sans-serif;
+    color: #0f172a;
+    line-height: 1.1;
+    letter-spacing: -2px;
+}
+
+.faq-title-outline {
+    -webkit-text-stroke: 2px #0f172a;
+    color: transparent;
+    /* Forces explicit inverse boundary line mimicking layout entirely */
+}
+
+.faq-subtitle {
+    margin-top: 15px;
+    color: #64748b;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1100px;
+    width: 100%;
+}
+
+@media (max-width: 1024px) {
+    .faq-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .faq-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.faq-card {
+    height: 240px;
+    perspective: 1500px;
+    /* Essential mapping constraint securely driving 3D render depth physics */
+    cursor: pointer;
+}
+
+.faq-card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+.faq-card.flipped .faq-card-inner {
+    transform: rotateY(180deg);
+}
+
+.faq-card-front,
+.faq-card-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 20px;
+    backface-visibility: hidden;
+    /* Secures absolute face occlusion natively */
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+}
+
+.faq-card-front {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    color: #1e293b;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+/* Graphic overlays removed matching explicit minimal reference strictly natively */
+.faq-card-front h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: -0.5px;
+    line-height: 1.3;
+    z-index: 1;
+}
+
+.faq-flip-prompt {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #94a3b8;
+    text-transform: uppercase;
+}
+
+/* The deep blue flipped tracking face */
+.faq-card-back {
+    background: #2563eb;
+    /* Vivid true blue matching exact asset strictly natively */
+    color: #ffffff;
+    transform: rotateY(180deg);
+    /* Counter-rotated awaiting strict flip activation */
+}
+
+.faq-card-back p {
+    font-size: 0.95rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    line-height: 1.6;
+    margin-top: 10px;
+}
+
+.faq-back-label,
+.faq-back-footer {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+}
+
+
+/* ========================================= */
+/* FINAL JOURNEY TUNNEL & FOOTER             */
+/* ========================================= */
+
+.journey-section {
+    padding: 0 40px 80px 40px;
+    background-color: var(--white);
+    display: flex;
+    justify-content: center;
+}
+
+.journey-box {
+    width: 100%;
+    max-width: 1400px;
+    background: transparent;
+    /* Explicitly fully stripped entirely transparent boundary */
+    border-radius: 40px;
+    position: relative;
+    overflow: hidden;
+    color: #ffffff;
+    padding: 80px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#magneticGrid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    /* Offload event handling entirely to the container bounds securely */
+}
+
+/* --- Content Alignment Layers --- */
+.journey-content-top {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 60px;
+    padding: 0 20px;
+}
+
+.journey-title {
+    font-size: clamp(1.5rem, 3vw, 3.2rem);
+    /* Scaled dimensions completely down mapped cleanly to explicit request */
+    color: #0a2540;
+    line-height: 1.1;
+    margin-bottom: 50px;
+    max-width: 1200px;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 12px;
+    white-space: nowrap;
+    /* Strictly prevents folding */
+}
+
+.oswald-font {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 1.25em;
+    /* Scaled cleanly dynamically relative to base */
+    text-transform: none;
+    letter-spacing: -1px;
+}
+
+.great-vibes-font {
+    font-family: 'Great Vibes', cursive;
+    font-weight: 400;
+    font-size: 1.6em;
+    /* Script font strictly runs larger dynamically recreating sweeping elegant layout */
+    letter-spacing: 1px;
+    transform: translateY(5px);
+}
+
+.journey-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 16px 36px;
+    border-radius: 50px;
+    text-decoration: none;
+    position: relative;
+    /* Structuring deep gradient map border physics natively */
+    border: 4px solid transparent;
+    background: linear-gradient(#020617, #020617) padding-box,
+        linear-gradient(135deg, #2563eb, #60a5fa) border-box;
+    z-index: 1;
+    overflow: hidden;
+    /* Core inner stability glow mixed against outer dynamic pulse mapping */
+    box-shadow: 0 10px 40px rgba(15, 82, 186, 0.4);
+    transition: transform 0.2s ease;
+    animation: btnGradientPulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes btnGradientPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.6), 0 10px 40px rgba(15, 82, 186, 0.4);
+    }
+
+    70% {
+        /* Pulse shoots outward scaling and fading seamlessly */
+        box-shadow: 0 0 0 15px rgba(37, 99, 235, 0), 0 10px 40px rgba(15, 82, 186, 0.4);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(37, 99, 235, 0), 0 10px 40px rgba(15, 82, 186, 0.4);
+    }
+}
+
+.journey-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 50px rgba(255, 255, 255, 0.5);
+}
+
+/* --- The Transformation Tunnel Bounds (Now specifically shaped like a pill wrapper natively!) --- */
+.journey-skills-area {
+    position: relative;
+    z-index: 2;
+    width: calc(100% - 80px);
+    /* Specific inset margins identically matching mockup proportions */
+    max-width: 1200px;
+    background: #080b13;
+    /* Pitch deep navy slate strictly matching focal wrapper constraint explicitly */
+    border-radius: 24px;
+    padding: 50px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.journey-subtitle {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 1);
+    margin-bottom: 30px;
+    z-index: 3;
+}
+
+.tunnel-wrapper {
+    position: relative;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tunnel-track {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.tunnel-marquee {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    /* Tighter arrays */
+    width: max-content;
+    /* Inverted vector executing physics explicitly reversed requested */
+    animation: marqueeHorizontalLeftToRight 30s linear infinite;
+}
+
+@keyframes marqueeHorizontalLeftToRight {
+    0% {
+        transform: translateX(-50%);
+    }
+
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+/* Boolean Pill Masking Executions Fixed Separating Entirely Natively */
+.tunnel-track-empty {
+    z-index: 2;
+    /* Strictly masked explicitly onto left bound entirely separating opacity blends flawlessly */
+    clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+    -webkit-clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+}
+
+.tunnel-track-checked {
+    z-index: 3;
+    /* Strictly masked explicitly onto right bound completely resolving dual-layering exactly natively */
+    clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
+    -webkit-clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
+}
+
+.skill-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    /* Reduced native pill boundaries matching original precise tracking */
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    font-family: 'Outfit', sans-serif;
+    color: rgba(255, 255, 255, 0.7);
+    background: transparent;
+    border: 1px dashed rgba(255, 255, 255, 0.25);
+    transition: all 0.3s;
+}
+
+.skill-pill-checked {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* Rigid physical geometries guaranteeing total bounds consistency securely natively */
+.sp-icon {
+    display: inline-flex;
+    width: 16px;
+    height: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    box-sizing: border-box;
+}
+
+.skill-pill-checked svg {
+    width: 18px;
+    height: 18px;
+    color: #38bdf8;
+}
+
+/* ============================================== */
+/* CENTRAL TUNNEL OVERLAY                         */
+/* ============================================== */
+.tunnel-center-lens {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px;
+    height: 60px;
+    /* Bounds tightly constrained explicitly matching internal tunnel physics */
+    /* The Magical Dual Concave Cutout Mask Logic Natively mapping precise bites out of the left/right edges securely! */
+    background:
+        radial-gradient(15px 40px at 0% 50%, transparent 99%, #0f1623 100%) left / 51% 100% no-repeat,
+        radial-gradient(15px 40px at 100% 50%, transparent 99%, #0f1623 100%) right / 51% 100% no-repeat;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tunnel-center-lens::before,
+.tunnel-center-lens::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    bottom: -10px;
+    /* Pushed significantly past box bound extending the convex arc exactly locally! */
+    width: 30px;
+    z-index: 11;
+}
+
+.tunnel-center-lens::before {
+    left: -15px;
+    /* Offset exactly onto the mathematical transparent clip bound logic natively */
+    border-right: 1.5px solid rgba(255, 255, 255, 0.95);
+    border-radius: 50%;
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.6));
+    box-shadow: 10px 0 20px -5px rgba(255, 255, 255, 0.05);
+    /* Soft inside lighting wash mapped */
+}
+
+.tunnel-center-lens::after {
+    right: -15px;
+    border-left: 1.5px solid rgba(255, 255, 255, 0.95);
+    border-radius: 50%;
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.6));
+    box-shadow: -10px 0 20px -5px rgba(255, 255, 255, 0.05);
+}
+
+.tunnel-glow-text {
+    font-size: 1.25rem;
+    font-weight: 500;
+    font-family: 'Outfit', sans-serif;
+    color: rgba(255, 255, 255, 1);
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+/* ========================================= */
+/* RESPONSIVE ADJUSTMENTS                    */
+/* ========================================= */
+@media (max-width: 1000px) {
+
+    /* Execute collapse of split grids explicitly dropping marquees flawlessly beneath string info constraints */
+    .testi-container {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+
+    .testi-title {
+        font-size: 3.5rem;
+    }
+
+    /* Our Work Track Vertical Translation */
+    .our-work-track {
+        height: auto;
+        padding-top: 40px;
+        padding-bottom: 80px;
+    }
+
+    .our-work-bg-wrapper {
+        position: relative;
+        height: auto;
+    }
+
+    .our-work-bg-text {
+        position: relative;
+        top: 0;
+        margin-bottom: 40px;
+        font-size: 22vw;
+        /* Escalate significantly on tiny screens to maintain presence */
+    }
+
+    .work-cards-wrapper {
+        display: flex;
+        /* Collapse lanes sequentially */
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+    }
+
+    .ow-lane {
+        position: relative;
+        width: 100%;
+        max-width: 400px;
+        left: 0 !important;
+        /* Strip stagger */
+        padding-top: 0 !important;
+        /* Strip layout tracking */
+    }
+
+    .ow-card {
+        position: relative !important;
+        /* Disengage sticking algorithm */
+        top: 0 !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .glass-header {
+        width: 95%;
+        padding: 12px 16px;
+    }
+
+    .main-title {
+        font-size: 3rem;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+/* ========================================= */
+/* FOOTER ARCHITECTURE                       */
+/* ========================================= */
+.site-footer {
+    background: #ffffff;
+    padding: 80px 5% 0;
+    /* Base stripped to allow explicit floor collision natively */
+    border-top: 1px solid #f1f5f9;
+    position: relative;
+    overflow: hidden;
+    /* Secures huge bounds from scrolling physically X axis natively */
+}
+
+.footer-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 60px;
+    flex-wrap: wrap;
+    /* responsive fallbacks inherently */
+}
+
+/* --- Left Subscriptions Column --- */
+.footer-left {
+    flex: 1;
+    min-width: 380px;
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 40px;
+}
+
+.footer-logo {
+    width: 46px;
+    /* Increased 5px visually mapping exact size request */
+    height: auto;
+    /* Pushed native dimension bounds safely mapping original layout proportions */
+}
+
+.footer-logo-text {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: -0.5px;
+}
+
+.footer-subscribe-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #334155;
+    margin-bottom: 16px;
+}
+
+.footer-subscribe-form {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 50px;
+    padding: 4px;
+    max-width: 400px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+}
+
+.footer-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 0 20px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: #0f172a;
+    min-width: 0;
+}
+
+.footer-input::placeholder {
+    color: #94a3b8;
+}
+
+.footer-btn {
+    background: #0f52ba;
+    /* Sapphire blue matching reference button natively */
+    color: #ffffff;
+    font-weight: 700;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.footer-btn:hover {
+    background: #0b3d8c;
+    transform: translateY(-1px);
+}
+
+/* --- Right Page Links Dictionary Layout --- */
+.footer-right {
+    display: flex;
+    gap: 80px;
+    flex-wrap: wrap;
+}
+
+.footer-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-col h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #0f172a;
+    /* Slate 900 */
+    margin-bottom: 24px;
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.footer-col a {
+    color: #64748b;
+    /* Slate 500 */
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.15s ease;
+}
+
+.footer-col a:hover {
+    color: #0f172a;
+    /* Slate 900 */
+}
+
+/* Mobile responsive constraints */
+@media (max-width: 900px) {
+    .footer-container {
+        flex-direction: column;
+    }
+
+    .footer-right {
+        gap: 40px;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 500px) {
+    .footer-right {
+        flex-direction: column;
+    }
+}
+
+/* --- Massive Faded Watermark Base --- */
+.footer-faded-watermark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1vw;
+    width: 100%;
+    margin-top: 80px;
+    padding-bottom: 0px;
+    opacity: 0.03;
+    /* Deep solid explicit layout fade constraint */
+    pointer-events: none;
+    /* Safely strips interactions cleanly out of rendering context */
+    user-select: none;
+    /* Imposed sheer physical clipping gradient cleanly masking bottom edge out into abyss natively */
+    -webkit-mask-image: linear-gradient(to bottom, black 30%, transparent 95%);
+    mask-image: linear-gradient(to bottom, black 30%, transparent 95%);
+}
+
+.watermark-logo {
+    height: 18vw;
+    width: auto;
+    filter: grayscale(100%);
+    /* Strips saturation natively exactly mimicking solid structural bounds natively */
+}
+
+.watermark-text {
+    font-family: 'Outfit', sans-serif;
+    font-size: 14vw;
+    font-weight: 1400;
+    line-height: 1;
+    letter-spacing: -6px;
+    color: #0f172a;
+}
+
+/* ========================================= */
+/* MAGIC CURSOR PHYSICS OVERRIDES              */
+/* ========================================= */
+@media (hover: hover) and (pointer: fine) {
+    * {
+        cursor: none !important;
+        /* Brute-force annihilates all native system cursors globally including structural I-beams and link hands */
+    }
+
+    .magic-cursor {
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 99999;
+        filter: drop-shadow(0px 8px 12px rgba(15, 82, 186, 0.4));
+        /* Cast heavily saturated physical shadows out dynamically */
+        will-change: transform;
+        transform: translate3d(-50px, -50px, 0);
+        /* Fallback hide until loop kicks in */
+    }
+
+    .cursor-pointer-svg {
+        display: block;
+        transform-origin: center center;
+        transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .magic-cursor.clicking .cursor-pointer-svg {
+        transform: scale(0.65);
+        /* Matches exactly requested "Click Squish" scaling dynamically onto the SVG matrix natively */
+    }
+}
+
+@media (hover: none),
+(pointer: coarse) {
+    .magic-cursor {
+        display: none !important;
+    }
+}
