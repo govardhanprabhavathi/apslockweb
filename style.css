@@ -2327,10 +2327,7 @@ body {
 /* MAGIC CURSOR PHYSICS OVERRIDES              */
 /* ========================================= */
 @media (hover: hover) and (pointer: fine) {
-    * {
-        cursor: none !important;
-        /* Brute-force annihilates all native system cursors globally including structural I-beams and link hands */
-    }
+    /* Magic Cursor Global Wipe Disabled for Native Tracking Restores */
 
     .magic-cursor {
         position: fixed;

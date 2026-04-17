@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize the auto-advancing What We Do section
     initWhatWeDoSlider();
 
-    // Initialize custom physics-based trailing cursor natively
-    initMagicCursor();
+    // TEMPORARILY DISABLED: Initialize custom physics-based trailing cursor natively
+    // initMagicCursor();
 
     // Initialize 3D Interactive FAQ Grid 
     initFAQCards();
